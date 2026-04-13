@@ -315,30 +315,31 @@ Implement (under **`Source/phase_6/`**):
 
 **Why Streamlit:**
 * Simple Python deployment without managing servers
-* Built-in UI capabilities for admin/debugging
+* Built-in UI capabilities for demo and debugging
 * Free tier available
-* Easy integration with Hugging Face datasets
+* Easy way to expose the recommendation workflow
 
-**Changes Required:**
+**Required files:**
 
-1. **Create `app.py`** at repo root:
-   * Wrap FastAPI app in Streamlit interface
-   * Add Streamlit UI for testing/debugging
-   * Mount FastAPI routes using `st.experimental_get_query_params()`
+1. **`app.py`** at repo root:
+   * This is the actual Streamlit Cloud entry file
+   * It imports the recommendation pipeline from the `app/phase_*` packages
+   * It provides a Streamlit-native UI for recommendations
 
-2. **Create `requirements-streamlit.txt`**:
-   * Include `streamlit`, `fastapi`, `uvicorn`, `groq`, etc.
+2. **`requirements-streamlit.txt`**:
+   * Include `streamlit`, `fastapi`, `uvicorn`, `groq`, and dataset dependencies
 
-3. **Streamlit-specific config:**
-   * Set `HF_TOKEN` in Streamlit secrets for Hugging Face access
+3. **Environment variables / secrets:**
+   * Set `HF_TOKEN` in Streamlit secrets if needed
    * Set `GROQ_API_KEY` in Streamlit secrets
-   * Configure `st.set_page_config()`
+   * Optional: set `ALLOWED_ORIGINS` and `VERCEL_ORIGIN_REGEX`
 
 **Deploy to Streamlit Cloud:**
 1. Push code to GitHub
 2. Connect repo to [share.streamlit.io](https://share.streamlit.io)
-3. Set secrets in Streamlit dashboard
-4. Deploy
+3. Use **main file path: `app.py`**
+4. Add secrets in the Streamlit dashboard
+5. Deploy
 
 ### Frontend Deployment (Vercel)
 
@@ -371,15 +372,19 @@ Implement (under **`Source/phase_6/`**):
 
 ### Architecture Changes
 
-**Backend (`Source/phase_6/main.py`):**
-* Add CORS middleware for Vercel domain
-* Support both standalone and Streamlit modes
-* Environment-based configuration
+**Backend (`app/phase_6/main.py`):**
+* FastAPI app with CORS middleware for frontend deployment
+* Regex-based support for Vercel preview/production domains
+* Static UI mounted at `/ui/` for local development
+
+**Streamlit entry (`app.py`):**
+* Root-level Streamlit app for Streamlit Cloud deployment
+* Reuses the same filtering, LLM ranking, merge, what-if, and relaxation pipeline
 
 **Frontend (`web/app.js`):**
 * Configurable API base URL
 * Fallback for local development
-* Error handling for CORS
+* Error handling for cross-origin requests
 
 ---
 

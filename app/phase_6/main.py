@@ -12,14 +12,30 @@ first ``POST /recommend`` instead; the home page and ``/ui/`` are available imme
 
 from __future__ import annotations
 
+import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from phase_1.config import PROJECT_ROOT
 from phase_5.api import router as recommend_router
+
+
+ALLOWED_ORIGINS = [
+    origin.strip()
+    for origin in os.getenv(
+        "ALLOWED_ORIGINS",
+        "http://localhost:3000,http://127.0.0.1:3000",
+    ).split(",")
+    if origin.strip()
+]
+VERCEL_ORIGIN_REGEX = os.getenv(
+    "VERCEL_ORIGIN_REGEX",
+    r"https://.*\.vercel\.app",
+)
 
 
 @asynccontextmanager
@@ -37,6 +53,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
+    allow_origin_regex=VERCEL_ORIGIN_REGEX,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
