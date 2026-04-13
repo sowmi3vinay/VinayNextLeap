@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Appetizing Intelligence</title>
+    <link rel="stylesheet" href="styles.css?v=10" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-content">
+        <h1>The Appetizing Intelligence</h1>
+        <nav class="header-nav">
+          <a href="#" class="nav-link active">Discover</a>
+          <a href="#" class="nav-link">History</a>
+          <a href="#" class="nav-link">Analytics</a>
+          <span class="ai-badge">AI ACTIVE</span>
+        </nav>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h2>Your Preferences</h2>
+          <p>Fine-tune your culinary discovery</p>
+        </div>
+
+        <form id="prefs-form" class="form">
+          <div class="field">
+            <span class="field-label">Locality</span>
+            <select name="location" id="location-select" required disabled>
+              <option value="">Loading localities...</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <div class="budget-display">
+              <span class="field-label">Max Budget (Two)</span>
+              <span class="budget-value" id="budget-display">₹1,200</span>
+            </div>
+            <div class="slider-container">
+              <input
+                type="range"
+                name="budget"
+                id="budget-slider"
+                class="slider"
+                min="100"
+                max="10000"
+                step="100"
+                value="1200"
+              />
+              <div class="slider-labels">
+                <span>₹100</span>
+                <span>₹10,000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="field-label">Cuisines (Optional)</span>
+              <button type="button" id="clear-cuisines" style="font-size: 0.75rem; color: var(--accent); background: none; border: none; cursor: pointer;">Clear All</button>
+            </div>
+            <div class="cuisine-pills" id="cuisine-pills">
+              <button type="button" class="pill" data-cuisine="mexican">Mexican</button>
+              <button type="button" class="pill" data-cuisine="italian">Italian</button>
+              <button type="button" class="pill" data-cuisine="asian">Asian</button>
+              <button type="button" class="pill" data-cuisine="continental">Continental</button>
+              <button type="button" class="pill" data-cuisine="indian">Indian</button>
+              <button type="button" class="pill" data-cuisine="chinese">Chinese</button>
+            </div>
+            <input type="hidden" name="cuisines" id="cuisines-input" />
+          </div>
+
+          <div class="field">
+            <span class="field-label">Minimum Rating</span>
+            <div class="rating-options">
+              <button type="button" class="rating-btn" data-rating="3">3+</button>
+              <button type="button" class="rating-btn active" data-rating="4">4+</button>
+              <button type="button" class="rating-btn" data-rating="4.5">4.5+</button>
+            </div>
+            <input type="hidden" name="min_rating" id="rating-input" value="4" />
+          </div>
+
+          <div class="field">
+            <div class="budget-display">
+              <span class="field-label">Top Results (K)</span>
+              <span class="budget-value" id="topk-display">5</span>
+            </div>
+            <div class="slider-container">
+              <input
+                type="range"
+                name="top_k"
+                id="topk-slider"
+                class="slider"
+                min="1"
+                max="10"
+                step="1"
+                value="5"
+              />
+              <div class="slider-labels">
+                <span>1</span>
+                <span>10</span>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary" id="submit-btn">Get Recommendations</button>
+        </form>
+      </aside>
+
+      <section class="results-section">
+        <div class="results-header">
+          <h2>AI Curated Results</h2>
+          <p class="results-subtitle" id="results-subtitle">Discover the perfect dining experience tailored to your taste.</p>
+        </div>
+
+        <div class="results-meta">
+          <div id="status" class="status" role="status" aria-live="polite"></div>
+          <span class="sort-label">Sort by: AI Match Score</span>
+        </div>
+
+        <div id="meta" class="hidden"></div>
+        <div id="results-list" class="results-grid" style="display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));"></div>
+      </section>
+    </main>
+
+    <script src="app.js?v=10" defer></script>
+  </body>
+</html>

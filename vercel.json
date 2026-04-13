@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "name": "appetizing-intelligence",
+  "builds": [
+    {
+      "src": "web/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "https://your-streamlit-app.streamlit.app/api/$1"
+    },
+    {
+      "src": "/recommend",
+      "dest": "https://your-streamlit-app.streamlit.app/recommend"
+    },
+    {
+      "src": "/localities",
+      "dest": "https://your-streamlit-app.streamlit.app/localities"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/web/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type"
+        }
+      ]
+    }
+  ]
+}
