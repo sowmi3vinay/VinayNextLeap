@@ -10,15 +10,15 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "https://vinaynextleap-2eoavz3yhujfjasgcfzufn.streamlit.app/api/$1"
+      "dest": "https://zomato-recommendation-api.onrender.com/api/$1"
     },
     {
       "src": "/recommend",
-      "dest": "https://vinaynextleap-2eoavz3yhujfjasgcfzufn.streamlit.app/recommend"
+      "dest": "https://zomato-recommendation-api.onrender.com/recommend"
     },
     {
       "src": "/localities",
-      "dest": "https://vinaynextleap-2eoavz3yhujfjasgcfzufn.streamlit.app/localities"
+      "dest": "https://zomato-recommendation-api.onrender.com/localities"
     },
     {
       "src": "/(.*)",
