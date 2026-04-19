@@ -10,15 +10,15 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "https://your-streamlit-app.streamlit.app/api/$1"
+      "dest": "https://vinaynextleap-2eoavz3yhujfjasgcfzufn.streamlit.app/api/$1"
     },
     {
       "src": "/recommend",
-      "dest": "https://your-streamlit-app.streamlit.app/recommend"
+      "dest": "https://vinaynextleap-2eoavz3yhujfjasgcfzufn.streamlit.app/recommend"
     },
     {
       "src": "/localities",
-      "dest": "https://your-streamlit-app.streamlit.app/localities"
+      "dest": "https://vinaynextleap-2eoavz3yhujfjasgcfzufn.streamlit.app/localities"
     },
     {
       "src": "/(.*)",
