@@ -21,4 +21,6 @@ dependencies = [
 dev = ["httpx>=0.24.0", "pytest>=7.0.0"]
 
 [tool.setuptools.packages.find]
-where = ["app"]
+where = ["."]
+include = ["app*"]
+exclude = ["tests*", "web*", "scripts*", "Docs*"]
